@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import { Footer, Navbar } from "../components";
 import LoginWith from "./LoginWith";
 
-
-
 const Login = () => {
+  const handleLogin = () => {
+    console.log("Login!!!");
+  };
+
   return (
     <>
       <Navbar />
@@ -34,10 +36,22 @@ const Login = () => {
                 />
               </div>
               <div className="my-3">
-                <p>New Here? <Link to="/register" className="text-decoration-underline text-info">Register</Link> </p>
+                <p>
+                  New Here?{" "}
+                  <Link
+                    to="/register"
+                    className="text-decoration-underline text-info"
+                  >
+                    Register
+                  </Link>{" "}
+                </p>
               </div>
               <div className="text-center">
-                <button className="my-2 mx-auto btn btn-dark" type="submit" disabled>
+                <button
+                  className="my-2 mx-auto btn btn-dark"
+                  type="button"
+                  onClick={handleLogin}
+                >
                   Login
                 </button>
               </div>

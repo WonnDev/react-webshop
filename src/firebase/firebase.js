@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { getFirestore, doc, updateDoc } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
 import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
@@ -19,27 +19,19 @@ export const auth = getAuth(firebase);
 export const firestore = getFirestore(firebase);
 export const db = getDatabase(firebase);
 export const provider = new GoogleAuthProvider();
-export const user = auth.currentUser;
-
 
 //signin
 export const signInWithGoogle = () => {
   signInWithPopup(auth, provider)
     .then(async (result) => {
-      const user = result.user;
-      const userDocRef = doc(firestore, "users", user.uid);
       try {
-        // await updateDoc(userDocRef, user.email);
+        //...
       } catch (err) {
-        console.log("Error addDoc: ", err);
+        console.log("Error trying Signin: ", err);
       }
     })
     .catch((error) => {
-      // const errorCode = error.code;
-      // const errorMessage = error.message;
-      const email = error.customData?.email;
-      // The AuthCredential type that was used.
-      const credential = GoogleAuthProvider.credentialFromError(error);
+      // const credential = GoogleAuthProvider.credentialFromError(error);
       // ...
       console.log("Error from LoginWithGoogle: ", error);
     });
@@ -48,5 +40,3 @@ export const signInWithGoogle = () => {
 export const signOutWithGoogle = () => {
   auth.signOut();
 };
-
-

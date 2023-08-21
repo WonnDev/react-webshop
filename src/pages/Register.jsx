@@ -1,23 +1,19 @@
 import React, { useState } from "react";
 import { Footer, Navbar } from "../components";
 import { Link } from "react-router-dom";
-
+import { createUser } from "../firebase/authentication";
 
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setname] = useState("");
 
-  //handle
-  const handleLogin = () => {
+  const handleRegister = () => {
     if (!email || !password) {
-      console.log("Email && Password Error!");
+      console.log("Email && Password are Required!");
       return;
     }
-    sessionStorage.setItem("email", email.trim());
-    sessionStorage.setItem("password", password);
-    console.log("OK!");
-
-    
+    createUser(email, password, name);
   };
 
   return (
@@ -32,10 +28,11 @@ const Register = () => {
               <div className="form my-3">
                 <label htmlFor="Name">Full Name</label>
                 <input
-                  type="email"
+                  type="name"
                   className="form-control"
                   id="Name"
                   placeholder="Enter Your Name"
+                  onChange={(e) => setname(e.target.value)}
                 />
               </div>
               <div className="form my-3">
@@ -75,7 +72,7 @@ const Register = () => {
                 <button
                   className="my-2 mx-auto btn btn-dark"
                   type="button"
-                  onClick={handleLogin}
+                  onClick={handleRegister}
                 >
                   Register
                 </button>
